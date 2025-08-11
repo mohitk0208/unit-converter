@@ -1,4 +1,4 @@
-// import LenghtConverter from "./components/LengthConverter"
+import LenghtConverter from "./components/LengthConverter"
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <div className="my-2">
         List the converters here...
 
-        {/* <LenghtConverter /> */}
+        <LenghtConverter />
       </div>
 
     </div>
