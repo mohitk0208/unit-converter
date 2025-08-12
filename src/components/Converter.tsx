@@ -39,14 +39,14 @@ export const Converter = ({ converterType, units, handleConvert }: ConverterProp
                 <div>
                     <label>
                         <p>Enter the {converterType} to convert</p>
-                        <input type="number" className="border rounded" value={value} onChange={onValueChange} />
+                        <input type="number" className="border rounded px-1 py-0.5" value={value} onChange={onValueChange} />
                     </label>
                 </div>
 
                 <div>
                     <label htmlFor="fromUnit">
                         <p>select the unit to convert from: </p>
-                        <select className="border rounded" name="fromUnit" id="fromUnit" value={fromUnit} onChange={(e) => setFromUnit(e.target.value)}>
+                        <select className="border rounded px-1 py-0.5" name="fromUnit" id="fromUnit" value={fromUnit} onChange={(e) => setFromUnit(e.target.value)}>
                             <option>Choose from unit</option>
                             {units.map((unit) => <option value={unit}>{unit}</option>)}
                         </select>
@@ -56,7 +56,7 @@ export const Converter = ({ converterType, units, handleConvert }: ConverterProp
                 <div>
                     <label htmlFor="toUnit">
                         <p>select the unit to convert to: </p>
-                        <select className="border rounded" name="toUnit" id="toUnit" value={toUnit} onChange={(e) => setToUnit(e.target.value)}>
+                        <select className="border rounded px-1 py-0.5" name="toUnit" id="toUnit" value={toUnit} onChange={(e) => setToUnit(e.target.value)}>
                             <option>Choose To unit</option>
                             {Object.values(units).map((unit) => <option value={unit}>{unit}</option>)}
                         </select>
@@ -73,7 +73,7 @@ export const Converter = ({ converterType, units, handleConvert }: ConverterProp
             </div>
 
             <div>
-                <p className="font-bold text-md">Converted Value </p>
+                <p className="font-bold text-md px-1 py-0.5">Converted Value </p>
                 <p>{convertedValue}</p>
             </div>
         </div>
