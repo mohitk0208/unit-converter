@@ -1,4 +1,5 @@
 import LengthConverter from "./components/LengthConverter"
+import TemperatureConverter from "./components/TemperatureConverter"
 import WeightConverter from "./components/WeightConverter"
 
 
@@ -11,6 +12,7 @@ function App() {
       <div className="my-2 flex gap-5" >
         <LengthConverter />
         <WeightConverter />
+        <TemperatureConverter />
       </div>
 
     </div>

@@ -15,8 +15,19 @@ const unitValuesMap: Map<string, Map<string, number>> = new Map([
 
 
 function WeightConverter() {
+
+    function handleConvert(value: number, fromUnit: string, toUnit: string): number | undefined {
+        if (!fromUnit || !toUnit || value === undefined) {
+            return;
+        }
+
+        const fromUnitValue = unitValuesMap.get(fromUnit.toLowerCase());
+        const converted = value * fromUnitValue?.get(toUnit.toLowerCase())!;
+        return converted;
+    }
+
     return(
-        <Converter converterType="Weight" units={units} unitValuesMap={unitValuesMap} />
+        <Converter converterType="Weight" units={units} handleConvert={handleConvert} />
         )
 }
 

@@ -37,8 +37,18 @@ const unitValuesMap: Map<string, Map<string, number>> = new Map([
 
 export const LenghtConverter = () => {
 
+    function handleConvert(value: number, fromUnit: string, toUnit: string): number | undefined {
+        console.log("Converting from", fromUnit, "to", toUnit, "with value", value);
+        if (!fromUnit || !toUnit || value === undefined) {
+            return;
+        }
+        const fromUnitValue = unitValuesMap.get(fromUnit.toLowerCase());
+        const converted = value * fromUnitValue?.get(toUnit.toLowerCase())!;
+        return converted;
+    }
+
     return (
-        <Converter converterType="length" units={units} unitValuesMap={unitValuesMap} />
+        <Converter converterType="length" units={units} handleConvert={handleConvert} />
     )
 }
 

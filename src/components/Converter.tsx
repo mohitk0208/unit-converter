@@ -3,10 +3,10 @@ import { useEffect, useState, type ChangeEvent } from "react"
 interface ConverterProps {
     converterType: string;
     units: Array<string>;
-    unitValuesMap: Map<string, Map<string, number>>;
+    handleConvert: (value: number, fromUnit: string, toUnit:string) => number | undefined;
 }
 
-export const Converter = ({converterType, units, unitValuesMap}: ConverterProps) => {
+export const Converter = ({ converterType, units, handleConvert }: ConverterProps) => {
 
     const [fromUnit, setFromUnit] = useState("");
     const [toUnit, setToUnit] = useState("");
@@ -20,24 +20,14 @@ export const Converter = ({converterType, units, unitValuesMap}: ConverterProps)
         setValue(e.target.valueAsNumber)
     }
 
-    function handleConvert() {
-
-        console.log("Converting from", fromUnit, "to", toUnit, "with value", value);
-
-        if (!fromUnit || !toUnit || value === undefined) {
-            return;
-        }
-
-        const fromUnitValue = unitValuesMap.get(fromUnit.toLowerCase());
-        const converted = value * fromUnitValue?.get(toUnit.toLowerCase())!;
-
-        setConvertedValue(converted);
+    function convertHandler() {
+        setConvertedValue(handleConvert ? handleConvert(value!, fromUnit, toUnit) : undefined);
     }
 
     useEffect(() => {
 
         if (isAutoConvertEnabled) {
-            handleConvert();
+            convertHandler();
         }
 
     }, [value, fromUnit, toUnit, isAutoConvertEnabled]);
@@ -74,11 +64,11 @@ export const Converter = ({converterType, units, unitValuesMap}: ConverterProps)
                 </div>
 
                 <div>
-                    <label htmlFor="isAutoCompleteEnabled" className="flex gap-1 items-center text-md" onClick={(e) => setIsAutoConvertEnabled(!isAutoConvertEnabled)}>
+                    <label htmlFor="isAutoCompleteEnabled" className="flex gap-1 items-center text-md" onClick={() => setIsAutoConvertEnabled(!isAutoConvertEnabled)}>
                         <input type="checkbox" name="isAutoConvertEnabled" id="isAutoConvertEnabled" checked={isAutoConvertEnabled} />
                         <span>Auto convert the value.</span>
                     </label>
-                    {!isAutoConvertEnabled && <button type="button" className="border py-0.5 px-2 rounded font-semibold" onClick={(e) => handleConvert()}>Convert</button>}
+                    {!isAutoConvertEnabled && <button type="button" className="border py-0.5 px-2 rounded font-semibold" onClick={() => convertHandler()}>Convert</button>}
                 </div>
             </div>
 
